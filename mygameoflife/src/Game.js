@@ -6,7 +6,15 @@ const wide = 800;
 const high = 600;
 
 class Game extends React.Component {
+    constructor(){
+        super();
+        this.rows = high/cellSize
+        this.cols = wide/cellSize
+    }
+    
     render () {
+
+
         return(
             <>
             <div className='Board' style={{
