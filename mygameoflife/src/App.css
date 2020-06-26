@@ -13,15 +13,24 @@
   margin: 0 auto;
 }
 
+.sizeButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+}
+
 .speedButtons{
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 0 auto;
 }
+
 button{
   border-radius: 5px;
   height: 20px;
+  cursor: pointer;
 }
 
 h1, h2{
@@ -41,4 +50,8 @@ h1, h2{
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+}
+
+.hide{
+  display: none;
 }

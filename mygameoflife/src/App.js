@@ -105,6 +105,9 @@ function App() {
         >
           Random
         </button>
+      </div>
+
+      <div className= {running ? "hide" : "sizeButtons"} >
         <button
           onClick={() => {
             if(running === false){
@@ -132,9 +135,9 @@ function App() {
         >
           100X100
         </button>
-      </div>
+        </div>
 
-      <div className="speedButtons">
+      <div className={running ? "hide" : "speedButtons" } >
         <button
           onClick={() => {
             runSpeed = 1000;
