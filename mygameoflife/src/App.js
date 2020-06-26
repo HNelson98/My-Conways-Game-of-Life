@@ -4,6 +4,7 @@ import "./App.css";
 
 let numRows = 50;
 let numCols = 50;
+let runSpeed = 1000;
 
 const operations = [
   [0, 1],
@@ -61,7 +62,7 @@ function App() {
       });
     });
 
-    setTimeout(runSimulation, 1000);
+    setTimeout(runSimulation, runSpeed);
   }, []);
 
   return (
@@ -108,7 +109,6 @@ function App() {
           onClick={() => {
             numRows = 25;
             numCols = 25;
-            
           }}
         >
           25X25
@@ -125,21 +125,58 @@ function App() {
           onClick={() => {
             numRows = 100;
             numCols = 100;
-            ;
           }}
         >
           100X100
         </button>
       </div>
+
+      <div className="speedButtons">
+        <button
+          onClick={() => {
+            runSpeed = 1000;
+          }}
+        >
+          Slow
+        </button>
+        <button
+          onClick={() => {
+            runSpeed = 700;
+          }}
+        >
+          Meduim
+        </button>
+        <button
+          onClick={() => {
+            runSpeed = 500;
+          }}
+        >
+          Fast
+        </button>
+        <button
+          onClick={() => {
+            runSpeed = 250;
+          }}
+        >
+          Extra Fast
+        </button>
+        <button
+          onClick={() => {
+            runSpeed = 1;
+          }}
+        >
+          Real Speed
+        </button>
+      </div>
       <ol className="instructions">
-          <li>
-            Any dead cell with three live neighbours becomes a live cell.
-          </li>
-          <li>Any live cell with two or three live neighbours survives.</li>
-          <li>All other live cells die in the next generation.</li>
-          <li>Similarly, all other dead cells stay dead.</li>
-          <li>To change grid size first click the size you want, then click clear.</li>
-        </ol>
+        <li>Any dead cell with three live neighbours becomes a live cell.</li>
+        <li>Any live cell with two or three live neighbours survives.</li>
+        <li>All other live cells die in the next generation.</li>
+        <li>Similarly, all other dead cells stay dead.</li>
+        <li>
+          To change grid size first click the size you want, then click clear.
+        </li>
+      </ol>
 
       <div
         className="board"
@@ -170,7 +207,7 @@ function App() {
         )}
       </div>
     </>
-  )
+  );
 }
 
 export default App;
