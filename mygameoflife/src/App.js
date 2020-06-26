@@ -107,25 +107,28 @@ function App() {
         </button>
         <button
           onClick={() => {
+            if(running === false){
             numRows = 25;
             numCols = 25;
-          }}
+            }}}
         >
           25X25
         </button>
         <button
           onClick={() => {
+            if(running === false){
             numRows = 50;
             numCols = 50;
-          }}
+          }}}
         >
           50X50
         </button>
         <button
           onClick={() => {
+            if(running === false){
             numRows = 100;
             numCols = 100;
-          }}
+            }}}
         >
           100X100
         </button>
@@ -173,9 +176,8 @@ function App() {
         <li>Any live cell with two or three live neighbours survives.</li>
         <li>All other live cells die in the next generation.</li>
         <li>Similarly, all other dead cells stay dead.</li>
-        <li>
-          To change grid size first click the size you want, then click clear.
-        </li>
+        <li>To change grid size first click the size you want, then click clear.</li>
+        <li><a href= " https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">About</a></li>
       </ol>
 
       <div
@@ -191,11 +193,12 @@ function App() {
               className="board"
               key={`${i}-${k}`}
               onClick={() => {
+                if(running === false){
                 const newGrid = produce(grid, (gridCopy) => {
                   gridCopy[i][k] = grid[i][k] ? 0 : 1;
                 });
                 setGrid(newGrid);
-              }}
+              }}}
               style={{
                 width: 20,
                 height: 20,
