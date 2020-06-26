@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useRef } from "react";
 import produce from "immer";
-import Game from "./Game.js";
 import "./App.css";
 
-const numRows = 50;
-const numCols = 50;
+let numRows = 50;
+let numCols = 50;
 
 const operations = [
   [0, 1],
@@ -28,7 +27,7 @@ const makeEmptyGrid = () => {
 
 function App() {
   const [grid, setGrid] = useState(() => {
-    makeEmptyGrid();
+    return makeEmptyGrid();
   });
 
   const [running, setRunning] = useState(false);
@@ -62,38 +61,97 @@ function App() {
       });
     });
 
-    setTimeout(runSimulation, 500);
+    setTimeout(runSimulation, 1000);
   }, []);
 
   return (
     <>
-      <button
-        onClick={() => {
-          setRunning(!running);
-          if (!running) {
-            runningRef.current = true;
-            runSimulation();
-          }
-        }}
-      >
-        {running ? "Stop" : "Start"}
-      </button>
+      <div className="header">
+        <h1>Conway's Game of Life</h1>
+        <h2>{running ? "Running" : undefined}</h2>
+      </div>
 
-      <button
-        onClick={() => {
-          setGrid(makeEmptyGrid());
-        }}>
-        Clear
-      </button>
+      <div className="buttons">
+        <button
+          onClick={() => {
+            setRunning(!running);
+            if (!running) {
+              runningRef.current = true;
+              runSimulation();
+            }
+          }}
+        >
+          {running ? "Stop" : "Start"}
+        </button>
+        <button
+          onClick={() => {
+            setGrid(makeEmptyGrid());
+          }}
+        >
+          Clear
+        </button>
+        <button
+          onClick={() => {
+            const rows = [];
+            for (let i = 0; i < numRows; i++) {
+              rows.push(
+                Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
+              );
+            }
+
+            setGrid(rows);
+          }}
+        >
+          Random
+        </button>
+        <button
+          onClick={() => {
+            numRows = 25;
+            numCols = 25;
+            
+          }}
+        >
+          25X25
+        </button>
+        <button
+          onClick={() => {
+            numRows = 50;
+            numCols = 50;
+          }}
+        >
+          50X50
+        </button>
+        <button
+          onClick={() => {
+            numRows = 100;
+            numCols = 100;
+            ;
+          }}
+        >
+          100X100
+        </button>
+      </div>
+      <ol className="instructions">
+          <li>
+            Any dead cell with three live neighbours becomes a live cell.
+          </li>
+          <li>Any live cell with two or three live neighbours survives.</li>
+          <li>All other live cells die in the next generation.</li>
+          <li>Similarly, all other dead cells stay dead.</li>
+          <li>To change grid size first click the size you want, then click clear.</li>
+        </ol>
 
       <div
+        className="board"
         style={{
           display: "grid",
           gridTemplateColumns: `repeat(${numCols}, 20px)`,
-        }}>
+        }}
+      >
         {grid.map((rows, i) =>
           rows.map((col, k) => (
             <div
+              className="board"
               key={`${i}-${k}`}
               onClick={() => {
                 const newGrid = produce(grid, (gridCopy) => {
@@ -104,7 +162,7 @@ function App() {
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: grid[i][k] ? "teal" : undefined,
+                backgroundColor: grid[i][k] ? "#00ffe5" : "#255752",
                 border: "1px solid black",
               }}
             />
@@ -112,7 +170,7 @@ function App() {
         )}
       </div>
     </>
-  );
+  )
 }
 
 export default App;
